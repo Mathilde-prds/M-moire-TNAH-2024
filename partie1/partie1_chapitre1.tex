@@ -1,0 +1,67 @@
+\chapter{Le modèle OAIS}
+	A l’international, l’apparition de l’informatique et, par conséquent, d’archives numériques entraîne le besoin de définir une norme et un modèle technique afin d’assurer le traitement et la conservation pérenne de ce nouveau type d’archives suivant les principes qui existaient déjà dans le monde des archives papier. En France comme dans la majorité des pays, c’est le modèle \gls{OAIS} qui est adopté et qui sert de base aux réflexions.
+
+\subsection{Historique}
+
+Né dans le secteur de l’aérospatiale (Groupe de travail du \textit{Consultative Committee for Space Data Systems}), le modèle \gls{OAIS} (\textit{Open Archival Information System} ou système ouvert d’archivage de l’information) est un modèle conceptuel généraliste\footcite{noauthor_modeet_2023}. En 2003, la norme ISO 14721 est créée à partir de ce modèle et donne lieu à un système de certification payant. L’\gls{OAIS} se positionne rapidement comme la norme de modélisation pour les systèmes d’archivage électroniques et est notamment recommandée dans ce cadre par le Référentiel Général d’Interopérabilité\footcite[pp.43-44]{montel_etude_2018}. En France, il est largement utilisé, aussi bien au service interministériel des archives de France (SIAF) qu’au sein de la Bibliothèque nationale de France (BnF). 
+
+
+Le modèle \gls{OAIS} se positionne ainsi rapidement comme le modèle à suivre de manière indispensable lorsqu’il s’agit de modéliser l’organisation d’un système d’archivage électronique (SAE). En effet, il garantit la bonne conservation et la pérennisation des archives numériques en décrivant les concepts et en précisant les responsabilités, les fonctions et les rapports qu’entretient le SAE avec son environnement.  
+Le modèle \gls{OAIS} s’organise en plusieurs acteurs clés\footcite[pp.28-29]{noauthor_reference_2012} : 
+\begin{itemize}
+	\item le Producteur (ou Producteur de données) qui fournit les informations au système d'archivage,
+	\item l’Utilisateur qui se sert de ces informations archivées,
+	\item le Gestionnaire (ou Management) qui est responsable de la surveillance et de la gestion quotidienne du système d'archivage.
+\end{itemize}
+
+\insererImage{0.5}{illustrations/figure1.png}{Schéma de l’environnement du modèle \gls{OAIS}}{figure1}
+ 
+
+La norme \gls{OAIS} se compose de deux modèles basés sur le \gls{UML} (\textit{Unified Modeling Language}) afin d’être compréhensible pour tous les acteurs du processus d’archivage : un modèle d’information et un modèle fonctionnel.
+
+\subsection{Le modèle d’information}
+Afin de garantir la pérennité de l’information, le modèle \gls{OAIS} stipule qu'une information numérique (une suite d’octets) doit être accompagnée d'informations de représentation. Ces informations décrivent notamment le logiciel utilisé, le format du fichier ou encore le codage nécessaire pour interpréter la série d’octets. Par exemple, un fichier dont les caractères sont encodés en UTF8 ne sera lisible que si le bon encodage est connu. Ces informations de représentation permettent de restituer et comprendre le document numérique. L'association de l'information (les données contenues dans l'objet numérique) et de ses informations de représentation forment ce qui est nommé \enquote{contenu d'information}. Toutefois, les informations de représentation seules ne suffisent pas pour assurer  l’ensemble des missions d'une archive. Il est nécessaire de leur ajouter également des informations de pérennisation. Ces dernières sont découpées en cinq catégories par le modèle \gls{OAIS} : 
+\begin{itemize}
+	\item les informations de contexte
+	\item les informations de provenance
+	\item les informations d’identification 
+	\item les informations de droits d’accès
+	\item les informations d’intégrité
+\end{itemize}
+
+
+Le regroupement des objets numériques à archiver et des informations de représentation et de pérennisation constitue un paquet d'information. Le modèle \gls{OAIS} en distingue trois types : 
+\begin{itemize}
+	\item le \textit{Submission Information package} (\gls{SIP}) : la forme entrante du paquet de données dans le \gls{SAE}. Il est généré par le producteur selon le modèle imposé par le gestionnaire du \gls{SAE}.
+	\item le \textit{Archival Information Package} (\gls{AIP}) : la forme que prennent les données pour être gérées spécifiquement par le gestionnaire. L'\gls{AIP} est conçu pour contenir tout ce qui est nécessaire pour comprendre, authentifier et rendre utilisable l'information archivée sur une longue période, même si le contexte technologique change.
+	\item le \textit{Dissemination Information Package} (\gls{DIP}) : la forme que prennent les données en sortie du \gls{SAE} afin d’être consultées par un utilisateur selon sa requête, ses droits et les droits de diffusion de l’information requêtée.
+\end{itemize}
+
+
+Il est à noter que les données contenues dans le \gls{SIP} lors du versement ne sont pas conservées sous cette forme dans le \gls{SAE}. En effet, lors de la formation d’un \gls{AIP} ou d’un \gls{DIP}, les données sont alors organisées selon une logique propre au besoin sans suivre nécessairement l’organisation du \gls{SIP} qui les a fait entrer dans le \gls{SAE}. 
+
+
+L’\gls{AIP}, quant à lui, obéit à un modèle complexe qui peut être détaillé par le schéma suivant\footcite[p.80]{noauthor_reference_2012} : 
+\insererImage{0.4}{illustrations/figure2.png}{Schéma du fonctionnement d’un \gls{AIP}}{figure2}
+
+
+Comme le montre ce schéma, l’\gls{AIP} est constitué de deux principaux éléments :
+\begin{itemize}
+	\item Le contenu d'information (\textit{Content Information}) constitué des données ou des objets numériques que l'on souhaite préserver. Cela peut être un fichier numérique, un ensemble de fichiers, ou même des objets physiques numérisés. Le \textit{Content Information} inclut également des informations contextuelles ou structurelles qui expliquent comment interpréter les données comme par exemple les formats de fichier, la structure des données, etc.
+	\item Le paquet d'informations de préservation (\textit{Preservation Description Information} ou PDI) composé d’informations de provenance, contextuelles, d’intégrité et de référence (identifiants uniques).
+\end{itemize}
+Le \textit{Packaging Information} et le \textit{Package Description} ont quant à eux des rôles complémentaires. Le premier contient les données nécessaires pour associer les \textit{Content Information} et le PDI de manière cohérente et faciliter leur accès. Le second décrit le contenu de l'\gls{AIP} de manière plus accessible et compréhensible et rend notamment possible la recherche par mots-clés, par noms, par sujets et autres.
+
+
+\subsection{Le modèle fonctionnel}
+Le deuxième modèle sur lequel se compose la norme \gls{OAIS} est le modèle fonctionnel. Celui-ci joue un rôle central en décrivant les principales fonctions et processus qui doivent être réalisés pour garantir l'archivage et la préservation à long terme des informations. Il s'agit d'une partie essentielle du modèle \gls{OAIS} car il définit les activités opérationnelles que tout système d'archivage numérique doit accomplir pour répondre aux exigences de préservation et d'accès. Il est construit autour de six entités principales qui structurent le modèle \gls{OAIS} : 
+\begin{enumerate}
+	\item L’entité \enquote{entrées} (\textit{Ingest}) : Elle reçoit les paquets d'information à verser et les transmet au stockage, régissant le mécanisme de dépôt des paquets, les contrôles d'accès associés et les interactions entre le producteur et l'archive lors du processus de versement. Elle procède également à la vérification de la conformité des paquets d'information reçus selon les exigences préalablement définies dans le protocole de versement. Ce processus englobe la réception des informations de la part des producteurs, la validation, la création des paquets d’information archivés (\gls{AIP}) et leur intégration dans le système d'archivage.
+	\item L’entité \enquote{stockage} (\textit{Archival Storage}) : Cette fonction s'occupe du stockage des \gls{AIP} de manière sécurisée, incluant la gestion des médias de stockage, la maintenance des \gls{AIP} et la récupération des informations en cas de besoin.
+	\item L’entité \enquote{gestion de la donnée} (\textit{Data Management}) : Cette fonction gère les informations descriptives associées aux \gls{AIP} et fournit des services de recherche et d'accès aux données. Elle inclut la gestion des métadonnées et des bases de données de l'archive.
+	\item L’entité \enquote{planification de la pérennisation} (\textit{Preservation Planning}) : Cette fonction prévoit des stratégies et des politiques pour garantir la pérennité des informations archivées face à l'évolution technologique. Elle inclut des actions proactives pour surveiller et analyser les risques potentiels pour la préservation des données.
+	\item L’entité \enquote{administration} (\textit{Administration}) : Cette fonction englobe la gestion globale du système d'archivage, y compris la définition des politiques, la gestion des ressources, et la coordination des activités entre les différentes fonctions.
+	\item L’entité \enquote{accès} (\textit{Access}) : Cette fonction gère les requêtes des consommateurs, la génération des paquets d'information de diffusion (\gls{DIP}) à partir des \gls{AIP}, et l'accès aux informations de manière sécurisée et contrôlée.
+\end{enumerate}
+Ce fonctionnement peut être explicité par le schéma suivant\footcite[p.44]{noauthor_reference_2012}, extrait de la documentation du modèle \gls{OAIS} :
+\insererImage{0.5}{illustrations/figure3.png}{Schéma décrivant les entités fonctionnelles du modèle \gls{OAIS}}{figure3}

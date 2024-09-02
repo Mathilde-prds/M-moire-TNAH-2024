@@ -1,0 +1,135 @@
+\chapter{Définition du périmètre et du processus de la fonctionnalité}
+\subsection{Définition du périmètre}
+A partir des échanges autour des conclusions de la partie précédente, il est maintenant nécessaire de définir le périmètre de la fonctionnalité.  Pour ce faire, le \gls{PRD} sur lequel nous avons déjà écrit des conclusions à la fois des entretiens utilisateurs mais également du \textit{\gls{benchmark}} est une ressource précieuse. Afin de s’assurer de la cohérence globale de ce périmètre, l’équipe utilise un tableau blanc Miro\footnote{ \href{https://miro.com/fr/}{https://miro.com/fr/}} afin d’y construire des diagrammes décrivant le processus d’utilisation de cette nouvelle fonctionnalité. Un premier processus est défini à l’échelle macro, il s’agit alors seulement de séparer les grandes étapes du parcours des utilisateurs à savoir : l’import, la visualisation des métadonnées importées dans l’interface \gls{Archifiltre} existante et l’export qui doit permettre d’effectuer un \textit{\gls{mapping}} \gls{SEDA}, c’est-à-dire d’associer les métadonnées aux balises \gls{SEDA} auxquelles elles correspondent. Dans un deuxième temps, nous tentons de détailler cette fois ce processus dans un diagramme qui décompose chaque action faite par l’utilisateur. Afin de s’assurer de la cohérence de ce processus, le diagramme décompose l’ensemble des actions réalisées par l’utilisateur depuis l’import de l’arborescence dans \gls{Archifiltre} jusqu’à l’export ReSIP et non pas seulement le processus de la fonctionnalité. 
+
+\clearpage
+
+\insererImage{0.5}{illustrations/figure18.png}{Diagramme d’utilisation de la fonctionnalité import de métadonnées dans \gls{Archifiltre}\protect\footnotemark}{figure18}
+\footnotetext{Zooms en annexes \ref{annexe6} et \ref{annexe6.2}}
+
+
+L’utilisation de la forme diagramme est intéressante car elle aide à imposer une certaine rigueur dans la réflexion. En effet, sa forme nous oblige à décomposer clairement les étapes et donc à être précis dans sa définition. Par ailleurs, tout au long de ce travail, certaines étapes comme la création de ce diagramme peuvent être réalisées par une personne seule. Néanmoins, des réunions sont ensuite organisées pour le présenter et en discuter avec le reste de l’équipe. Ceci permet non seulement de valider à chaque étape ce que l’on produit afin de s’assurer de conserver une direction cohérente mais cela impose également à la personne qui présente une réflexion sur son travail et l’oblige à être claire et à justifier chacun de ses choix. Enfin, certaines personnes de l’équipe sont parfois un peu éloignées du sujet car elles travaillent sur un autre domaine et leurs remarques s’avèrent souvent précieuses car elles possèdent alors plus de recul et une réflexion neuve. 
+
+Le périmètre (ou \textit{scope}) ainsi défini, il est inscrit dans le \gls{PRD} de la façon suivante, reprenant les étapes réalisées par l’utilisateur : 
+\begin{enumerate}
+	\item Fournir une méthodologie pour l'ajout en masse de métadonnées (voir téléchargement d'un modèle)
+	\item Import d’un fichier .csv de métadonnées (glisser/déposer + parcourir les fichiers)
+	\item \textit{Mapping} import : définir une donnée pivot automatique et écrasement possible de données déjà dans \gls{Archifiltre}
+		\begin{itemize}
+			\item Chemin imposé comme donnée pivot dans un premier temps et on propose à l’utilisateur de choisir la donnée pivot dans une prochaine évolution de la fonctionnalité.
+			\item Dans une prochaine évolution, possibilité de choisir quelle colonne de métadonnée déjà présente dans \gls{Archifiltre} est écrasée avec quelle colonne de l’import.
+		\end{itemize}
+	\item Vérification des métadonnées importées (s'assurer que la jointure s’est correctement réalisée) : validation ou annulation 
+		\begin{itemize}
+			\item Potentiel message d’erreur si toutes les lignes du CSV ne s’associent pas à un fichier/dossier.
+		\end{itemize}
+	\item Etude des métadonnées importées par visualisation sur les stalactites 
+		\begin{itemize}
+			\item Affichage des métadonnées individuellement par fichier  (onglet enrichissement amélioré)	
+		\end{itemize}
+	\item Modifications unitaires des métadonnées importées sur le modèle de ce qu’\gls{Archifiltre} permet déjà de faire.
+	\item Export pour étude : 
+		\begin{itemize}
+			\item Ajout des métadonnées importées dans les exports CSV et \textit{Excel}.
+			\item Ajout d’une colonne \enquote{nouvel [nom\_colonne\_importée]} sur le modèle de ce qui est fait pour le nom, chemin, etc en cas de modification unitaire dans \gls{Archifiltre}.
+		\end{itemize}
+	\item Export pour versement Export ReSIP (SEDA 2.2)
+		\begin{itemize}
+		\item \textit{Mapping} \gls{SEDA} d'après ce que sélectionne l'utilisateur (se base sur le dictionnaire des balises \gls{SEDA} 2.2 et/ou sur les noms français des balises dans l’interface ReSIP).
+		\item Choix dans deux listes déroulantes : \textit{management} (gestion) et \textit{content} (description)
+		\end{itemize}
+\end{enumerate}
+
+\subsection{La \textit{user story map}}
+
+Une fois le processus défini dans son ensemble, l’équipe l’organise au sein de ce que l’on appelle une \textit{user \gls{story map}}\footcite{miro_modeuser_nodate} ou \enquote{cartographie des récits utilisateurs} en français. La \textit{\gls{story map}} reprend en fait les principes du \gls{MVP} et permet de décomposer en \enquote{\textit{user stories}}, c'est-à-dire en plusieurs processus d’utilisation, les différentes versions de la fonctionnalité\footcite{kaley_mapping_2021}. Comme nous l’avons expliqué précédemment, l’équipe \gls{Archifiltre} fonctionne en mode produit et propose donc le plus rapidement possible un \gls{MVP} à ses utilisateurs avant d’améliorer cette première version en fonction des retours. La \textit{\gls{story map}} permet alors de mettre à plat toutes les idées et de les organiser dans l’ordre de priorité. Dans la première \textit{user story}, qui décrit le processus utilisateur du \gls{MVP}, on ne conserve donc que ce que l’on juge essentiel. On positionne dans les \textit{user stories} suivantes les améliorations possibles par ordre de priorité en fonction de leur pertinence d’après les retours utilisateurs recueillis.
+\insererImage{0.3}{illustrations/figure19.png}{\textit{User \gls{story map}} de la fonctionnalité import de métadonnées\protect\footnotemark}{figure19} 
+\footnotetext{Zooms en annexes \ref{annexe8.1} et \ref{annexe8.2}.}
+
+
+Les étapes, que l’on voit ci-dessus en rose, reprennent les actions effectuées par l’utilisateur telles que définies dans le diagramme. Pour chaque \textit{user story}, organisée en \enquote{\textit{release}}, c’est-à-dire en version de la fonctionnalité, on décrit dans les encarts jaunes précisément ce en quoi consiste chaque étape. Il peut y avoir plusieurs encarts pour une même étape car chacun correspond à une action possible. Par exemple, pour l’étape \enquote{visualiser les métadonnées avant import}, les deux étapes sont le détail des messages d’alerte à afficher pour l’utilisateur et la possibilité de valider ou d’annuler l’import. Dans une \textit{user \gls{story map}}, il est essentiel de se limiter à la description des actions et non des visuels afin de ne pas biaiser les réflexions futures.
+
+
+Enfin, l’intérêt de la \textit{\gls{story map}} est également de pouvoir la modifier et l’alimenter, notamment pour les user stories qui suivent le \gls{MVP}, \textit{a posteriori} à partir des retours utilisateurs.
+ 
+\subsection{Les tests utilisateurs}
+
+Afin de valider le périmètre et la \textit{user story} du \gls{MVP}, il est nécessaire d’éprouver nos choix auprès des futurs utilisateurs pour s'assurer que notre solution est la plus pertinente. Pour ce faire, des tests utilisateurs sont organisés. Ces tests sont fondamentaux dans l’approche produit, ils sont consciencieusement préparés en amont\footnote{\cite{tanovic_customer_2024} ; \cite{ux-republic_guideline_2019}}. Pour diriger un test utilisateur, des hypothèses sont formulées. On construit ensuite un questionnaire afin de pouvoir vérifier ces hypothèses en prenant garde de ne pas influencer les utilisateurs interrogés. Pour ce faire, les questions doivent rester neutres et ouvertes\footcite{buset_leading_2024}. 
+
+
+Pour ces tests, des archivistes de quatre services d’archives de ministères ont été interrogés : 
+\begin{itemize}
+	\item Karim Amara, Emilie Godest et Marie-Pierre Diquelou du Ministère de la transition écologique (MTE), 
+	\item Anne Lambert et Thibaut Larrède des Ministères sociaux (MS), 
+	\item Anne Bourquard du Ministère de l'Agriculture (MA),
+	\item Justine Dilien et Julie Wannecque du Ministère de la Culture (MC).
+\end{itemize}
+Le questionnaire qui a servi de base à chacun de ces entretiens est le suivant : 
+\begin{enumerate}
+	\item \textbf{Evaluation du besoin (contexte)}
+		\begin{itemize}
+			\item Effectuez-vous des versements d’archivage électronique dans un \gls{SAE} ? Lequel ?
+			\item Pouvez vous me décrire votre méthode de traitement brièvement ?
+			\item Avez-vous déjà eu à archiver un \gls{SI}/espace collaboratif (type \textit{Sharepoint}) ? Si oui, quelle méthode avez-vous utilisée ?
+			\item Avez-vous déjà eu besoin d’enrichir en masse les métadonnées de documents ? Si oui, quels types de métadonnées (gestion, description, exemples ?) ? Sous quel format étaient ces métadonnées ?
+			\item Connaissez-vous et maîtrisez-vous le \gls{SEDA} ?
+			\item Utilisez-vous ReSIP pour les versements ? Avec l’export \gls{Archifiltre} ou directement en glissant l’arborescence à traiter/archiver ?
+		\end{itemize}
+	\item \textbf{Confrontation à nos hypothèses}
+	\begin{itemize}
+		\item Si vous aviez un outil qui permettait d’associer en masse des métadonnées à des documents, comment l’imagineriez-vous ?
+		\item Qu’est-ce qui serait primordial pour vous pour un tel outil ?
+		\item Quel format serait le plus adapté à cet import ?
+		\item Après, pour avoir nos réponses si ça n’a pas été évoqué instinctivement :  Identifiez-vous le besoin de :
+		\begin{itemize}
+			\item Vérifier les données importées
+			\item Modifier les données importées
+			\item Pouvoir remplacer des données déjà associées aux documents
+		\end{itemize}
+		\item Dans le cadre de l’utilisation d’un CSV de métadonnées pour débuter un traitement dans ReSIP, comment envisagez vous le passage du CSV de métadonnées importé et associé aux documents vers le format ReSIP qui demande d’avoir placé les métadonnées dans des colonnes ayant pour intitulé les balises \gls{SEDA} adéquates ?
+		\item \gls{Archifiltre} fait pour l’instant ce \textit{\gls{mapping}} automatiquement, si celui-ci devait se faire par l’utilisateur, comment imaginez-vous l’interface ?
+		\item Seriez-vous plus à l’aise pour faire la correspondance entre le nom de la colonne de métadonnées importée et le nom d’une balise \gls{SEDA} ou avec le nom français (comme le fait ReSIP) ?
+	\end{itemize}
+\end{enumerate}
+
+
+Une fois les réponses à ces questions obtenues, sachant bien sûr que le questionnaire est adapté en fonction de la discussion, nous leur présentons les détails du périmètre que nous avons imaginé. Ainsi, nous évitons de biaiser leur réflexion en amont et pouvons recueillir leurs réactions spontanées et comparer ce qu’ils ont imaginé de cette fonctionnalité avec ce que nous avons prévu. Le périmètre présenté est celui détaillé dans la partie 3, chapitre 8.1 (p.\pageref{figure18}). Nous le présentons d’abord d’un point de vue macro, en détaillant seulement les grandes étapes à l’aide du diagramme ci-dessous : 
+
+\insererImage{0.42}{illustrations/figure20.png}{Diagramme macro de la fonctionnalité import de métadonnées}{figure20}
+
+
+Nous recueillons ainsi des premiers retours notamment sur ce qui peut sembler obscur ou contre-intuitif pour l’utilisateur à ce stade. Nous détaillons ensuite chaque étape en présentant les actions faites par l’utilisateur tout au long du processus. 
+
+
+Ce déroulé d’entretien nous permet donc de vérifier les hypothèses formulées en amont de ce travail à partir des points qui nous semblent susceptibles de bloquer.  
+Le résultat de ces tests est résumé par le tableau suivant : 
+
+\clearpage
+
+\begin{table}[h]
+	\begin{tabular}{|p{7cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+		\hline
+		\textbf{Hypothèses} & \textbf{MTE} & \textbf{MS} & \textbf{MA} & \textbf{MC} \\
+		\hline
+		Il est préférable de permettre de faire le \textit{mapping} vers des balises \gls{SEDA} en anglais ET en français de type ReSIP & Oui & Oui & Oui & Oui \\
+		\hline
+		L’import de métadonnées est un besoin des archivistes des ministères pour archiver les SI & Oui & Oui & Pas encore mais besoin futur & Oui \\
+		\hline
+		Besoin de pouvoir écraser des données déjà présentes dans \gls{Archifiltre} & Oui & Oui & Oui & Oui \\
+		\hline
+		Besoin de visualiser les nouvelles métadonnées importées sur le modèle de ce qu’on a déjà dans \gls{Archifiltre}  & / & Oui & Oui mais à voir comment & Oui \\
+		\hline
+		Besoin de pouvoir modifier unitairement & / & Oui & Non & Oui \\
+		\hline
+		Besoin de l’interface de vérification avant la validation de l’import & Oui & Oui & Oui & Oui \\
+		\hline
+		Importer un format CSV est le mieux & Oui & Oui & Oui & Oui mais format \textit{Excel} serait bien aussi \\
+		\hline
+	\end{tabular}
+	\caption{Tableau des résultats de la vérification des hypothèses lors de tests utilisateurs}
+\end{table}
+
+Ces résultats permettent de confirmer notre périmètre. Par ailleurs, ils mettent en lumière le fait que la possibilité de modifier unitairement les métadonnées importées est intéressante mais n’est pas prioritaire. Enfin, au-delà de la vérification de ces hypothèses, un bon test utilisateur permet également de faire émerger des besoins ou des idées auxquelles l’équipe n’a pas forcément pensé. En effet, ces échanges sont avant tout faits pour recueillir les réflexions et les réactions les moins biaisées possible et donc, idéalement, permettre de faire ressortir des potentiels oublis de l’équipe lors de leurs réflexions. Nos tests ont par exemple fait émerger une grande diversité en fonction du service d’archives dans les réflexions concernant l’archivage des systèmes d’information mais également une hétérogénéité entre les archivistes dans leur maîtrise des problématiques liées à l’archivage électronique et notamment du \gls{SEDA}. Nous avons notamment pu confirmer le fait qu’il est important de fournir une traduction française des balises \gls{SEDA} mais également le nom original de ces balises car chacun a sa préférence. 
+\\
+
+A l'issue de cette fermeture du premier diamant, le processus utilisateur est validé. C’est à ce moment que le développeur intervient et participe à l’ouverture du deuxième diamant concernant la définition de l’interface utilisateur et les choix techniques au bon développement de la fonctionnalité. 

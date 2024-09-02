@@ -1,0 +1,77 @@
+\chapter{Etude large du périmètre de la fonctionnalité}
+
+
+Selon les principes de travail définis précédemment, l’équipe \gls{Archifiltre} commence donc le développement de la nouvelle fonctionnalité d’import de métadonnées en masse en recueillant le besoin utilisateur afin de donner une direction cohérente au cadrage de son développement. Ce recueil, ainsi que le \textit{\gls{benchmark}} qui le suit, font partie de la première étape de la méthode double diamant employée ici. 
+
+
+\subsection{Définition du besoin utilisateur}
+Après avoir constaté théoriquement le besoin montant via les indications du SIAF ainsi que le besoin au sein des Ministères sociaux, il était important d’en faire une étude plus large afin de donner une direction cohérente au cadrage du développement de cette nouvelle fonctionnalité. Quatre archivistes ont été interrogés : 
+\begin{itemize}
+	\item Anne Lambert, conservatrice du patrimoine et cheffe du service des archives des Ministères sociaux, 
+	\item Thibaut Larrède, archiviste hybride au sein des Ministères sociaux, 
+	\item Coline Vialle, archiviste  numérique à la métropole de Brest,
+	\item Jérome Rouzaire, élève conservateur du patrimoine en stage aux archives municipales de Nice durant lequel il a pu travailler à l’archivage d’un espace \textit{Sharepoint}. Cette expérience ainsi que sa formation récente comprenant de l’archivage électronique en fait un profil particulièrement précieux pour nous.
+\end{itemize} 
+Ces entretiens étaient relativement ouverts car leur but était avant tout de mieux connaître l’environnement de travail de chacun et ses potentiels impacts sur l'application de la chaîne de traitement afin d’identifier correctement les cas d’usage que notre fonctionnalité devait couvrir pour être utile à cette diversité de profils. Ils ont mené à des discussions sur le besoin d’une fonctionnalité d’association des données supplémentaires issues des systèmes d’information, aussi appelées données-registre, et des documents extraits des \gls{SI} mais également sur la manière dont ces archivistes gèrent aujourd’hui l’archivage des systèmes d’information et plus largement sur les améliorations souhaitées d’\gls{Archifiltre}. 
+
+
+A partir des informations recueillies et de leur croisement, nous pouvons identifier quatre besoins principaux : 
+\begin{enumerate}
+	\item Le besoin de pouvoir associer des données-registres à des documents et les exporter dans un tableur correspondant au \gls{SEDA} de ReSIP.
+	\item Le besoin de permettre à l’utilisateur de choisir la balise \gls{SEDA} qui correspond à la colonne de métadonnées importée.
+	\item Le besoin de pouvoir exporter ce qu’on a fait dans \gls{Archifiltre} et de le ré-importer sur la même arborescence modifiée.
+	\item Le besoin d’avoir la possibilité d’importer un vocabulaire contrôlé et/ou de sauvegarder les tags.
+\end{enumerate}
+Ces besoins sont ceux qui sont principalement ressortis des entretiens lorsque l’on évoque la possible création d’une fonctionnalité \enquote{d’import de métadonnées} avant de préciser la volonté de l’utiliser spécifiquement pour l’archivage des systèmes d’information. Le fait de rester assez large dans un premier temps lors de l’entretien permet de recueillir les réels besoins des utilisateurs sans les biaiser et ainsi de garantir l’ouverture au maximum du premier diamant dans lequel nous nous situons. Ces entretiens nous ont également permis de recueillir des cas d’usage concrets d’utilisation de cette nouvelle fonctionnalité et donc de confirmer son utilité. Jérôme Rouzaire a ainsi évoqué par exemple le cas d’un système d’information gérant les dossiers de contentieux rencontrés lors de son expérience au sein des archives de la métropole de Nice. Lors de l’archivage, une arborescence de documents était extraite d’un côté et un tableur contenant des métadonnées supplémentaires de l’autre. Chaque ligne pouvait être associée à un document. Il était alors nécessaire d’associer ces métadonnées supplémentaires à chaque document au sein du \gls{SIP}, ce pour quoi notre nouvelle fonctionnalité est pensée.
+
+Enfin, ces entretiens ont également permis d’étudier la méthodologie employée, lorsqu’elle existe, au sein des services afin de réussir à archiver les systèmes d’information. Ainsi, Anne Lambert pour le moment combine manuellement l’export \enquote{ReSIP} d’\gls{Archifiltre}, l’export de métadonnées de ReSIP et le fichier contenant les métadonnées supplémentaires extrait du \gls{SI} afin d’obtenir un fichier où toutes les métadonnées d’un même document se situent sur la même ligne du tableur final et les en-têtes de colonnes correspondent au format accepté par ReSIP, c’est à dire des chemins de balises \gls{SEDA}. Par exemple, pour les métadonnées de titre, le nom de la colonne devra être \enquote{Content.Title}\footnote{cf. Annexe \ref{annexe7}}. 
+
+
+Enfin, il est à noter que l’archivage des systèmes d'information reste aujourd’hui traité au cas par cas par les services d’archives qui sont encore peu nombreux à se saisir du sujet. Ainsi, le développement de cette fonctionnalité présente la particularité de se proposer de répondre à un besoin tout en créant une méthodologie pour un besoin qui n’est encore que futur pour beaucoup de services d’archives. 
+
+\subsection{\textit{Benchmark}}
+
+En parallèle de l’étude du besoin utilisateur, il est important également d’ouvrir les réflexions en étudiant des fonctionnalités similaires déjà existantes. Cet exercice nous permet alors d’identifier les processus auxquels peuvent être habitués nos utilisateurs et de faire un état de l’art de l’\gls{UX} sur nos sujets d’intérêt afin de s’en inspirer, d’éviter des erreurs et ainsi de favoriser l’adoption de notre fonctionnalité. Pour ce faire, un \textit{\gls{benchmark}} est réalisé après avoir défini les sujets d’étude afin de le cadrer sans pour autant le contraindre. Pour cette fonctionnalité, les sujets d’attention du \textit{\gls{benchmark}} sont les suivants : la liberté et la facilité des processus d’import pour l’utilisateur, les formats d’import acceptés et la gestion des erreurs.
+
+
+Nous étudions alors dans un premier temps les logiciels utilisés communément au sein des services publics d’archives comme ReSIP, \textit{Microsoft Sharepoint}, Ligéo, As@lae, \textit{Excel} et notamment sa fonctionnalité\textit{Power Query}, \textit{Spark Archives}, \textit{OpenRefine} et Brevo. Nous  proposons ensuite de s’intéresser à des logiciels utilisés plutôt dans des entreprises privées comme ArcGIS et Alfresco. Pour ces deux cas, les solutions proposées sont relativement complexes, notamment avec l’utilisation d’\gls{ETL} (extraction, transformation et chargement) ne permettant pas l’autonomie totale des archivistes. Enfin, afin de suivre la logique d’élargissement du premier diamant, nous nous intéressons à des cas éloignés du monde des archives avec l’exemple des réseaux sociaux et notamment d’Instagram. En effet, cette application permet d’importer une ou plusieurs photographies et de leur associer des métadonnées supplémentaires comme une musique, un lieu ou une description et son fonctionnement intuitif est une inspiration intéressante pour atteindre nos objectifs de clarté et de simplicité. 
+
+
+Nous tirons de ce \textit{\gls{benchmark}} deux principales inspirations : ReSIP et \textit{Power Query} d’\textit{Excel}, pour la simplicité de leurs processus d’import de données et la facilité essentielle de prise en main par l’utilisateur. Le processus d’import de \textit{Power Query} est particulièrement intéressant et se positionne en inspiration principale pour la définition de celui de notre fonctionnalité. 
+
+\clearpage %Permet de garder l'image après ce paragraphe malgré sa taille.
+
+\insererImage{1}{illustrations/figure16.png}{Fenêtre de vérification suite à l’import de métadonnées dans \textit{Excel} (\textit{Power Query})}{figure16}
+
+
+Par ailleurs, il ressort de ce \textit{\gls{benchmark}}, et notamment de l’étude des différents réseaux sociaux, l’importance de l’utilisation d’icônes ou de noms de boutons clairs et de la cohérence entre cette nouvelle fonctionnalité et le reste de l’application \gls{Archifiltre} déjà existant. Nous tirons également de cette étude la conscience du besoin de proposer une fonctionnalité qui reste techniquement simple à utiliser pour tous et qui permet aux archivistes d’être autonomes dans leur utilisation. Nous excluons donc par exemple la manipulation d’\gls{XML} ou d’\gls{ETL}.
+
+
+Pour ce qui est de la partie export des métadonnées associées depuis \gls{Archifiltre} afin de les importer dans ReSIP , nous choisissons à ce stade de nous inspirer principalement de la simplicité d’usage de la solution mise en place par Ligéo en laissant à l’utilisateur la possibilité de choisir la balise \gls{SEDA} correspondant à chaque métadonnée à exporter.
+
+\clearpage %Permet de garder l'image après ce paragraphe malgré sa taille.
+
+\insererImage{1}{illustrations/figure17.png}{Interface de \textit{\gls{mapping}} de Ligéo entre l’intitulé de la colonne et une liste dans \enquote{type de champs}}{figure17}
+
+
+
+Ainsi, ce \textit{\gls{benchmark}} nous permet d’élargir nos réflexions et de lister des éléments que nous souhaitons intégrer à notre solution à partir de chaque partie utile des outils étudiés en les adaptant aux besoins utilisateurs identifiés précédemment.
+
+\subsection{\textit{Product Requirements Document} et cadrage de l’existant}
+
+Le \textit{\gls{benchmark}} associé aux entretiens utilisateurs nous a donc permis d’explorer un large panel d’options et de besoins afin d’alimenter nos réflexions. Au sein de l’équipe \gls{Archifiltre}, afin de garder une trace de toutes ces réflexions, tout est consigné dans un document qui est alimenté tout au long du développement de la fonctionnalité et qui permet également de le cadrer : le \textit{Product Requirement Document} (\gls{PRD}) ou document d’exigence produit\footcite{formlabs_comment_nodate}. Ce document dont le squelette vierge est consultable en annexe\footnote{Cf. Annexe \ref{annexee}} est rempli par l’équipe tout au long des réflexions et des avancées. Il permet également de guider l’équipe dans les différentes étapes du développement, imposant une certaine rigueur dans la méthode et dans les réflexions simplement par le fait de devoir le compléter. Le \gls{PRD} de la nouvelle fonctionnalité était le principal livrable technique de notre stage.
+
+
+Un projet débute donc toujours avec l’écriture du début du \gls{PRD}. Ce début impose une explication du contexte au sein de l’application et de la situation actuelle au commencement du développement. Pour notre fonctionnalité, ces parties sont constituées d’un état des lieux de la preuve de concept (\gls{POC}) présente au sein de l’application mais non fonctionnelle ainsi que d’un résumé des observations fournies par Olkoa dans le cadre de leur prestation pour l’archivage de CONTIX+\footnote{Cf. partie 2, chapitre 5.\ref{part2.chap2.2}.}. 
+
+
+Les conclusions des entretiens utilisateurs ainsi que celles du \textit{\gls{benchmark}} sont inscrites dans leurs parties respectives à la suite de cet état des lieux. L’équipe \gls{Archifiltre} utilisant Notion, les pages des prises de note de chaque entretien ainsi que celle du \textit{\gls{benchmark}} sont liées à leur partie du \gls{PRD}. Une fois ces conclusions définies, la partie définissant les objectifs du développement organisés dans l’ordre de priorité est complétée. Cette partie se situe au début du \gls{PRD} afin d’être facilement visible et mise en valeur à chaque lecture. Ces objectifs doivent en effet guider ensuite l’ensemble du développement. Pour notre nouvelle fonctionnalité, les objectif sont les suivants : 
+\begin{itemize}
+	\item \underline{Objectif 1 :} Ajouter en masse de nouvelles métadonnées dans \gls{Archifiltre} et les exporter vers ReSIP pour un versement.
+	\item \underline{Objectif 2 :} Pouvoir faire l’archivage d’un \gls{SI} ou d’une partie d’un espace collaboratif.
+	\item \underline{Objectif 3 :} Pouvoir importer des tags en masse issus d’une liste de vocabulaire contrôlé.
+\end{itemize}
+Lorsque le développement sera terminé, c’est l’accomplissement de ces objectifs qui permettra de déterminer son succès de manière qualitative.
+
+
+Une fois le premier diamant ouvert et les objectifs clairement définis, il faut le refermer en triant parmi toutes les options découvertes pendant ce premier travail. Ce choix permet alors de faire émerger un premier processus d’utilisation de ce qui sera la fonctionnalité développée.

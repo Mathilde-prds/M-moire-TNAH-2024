@@ -1,0 +1,69 @@
+\chapter{Fonctionnement de l’équipe Archifiltre}
+
+L’équipe \gls{Archifiltre} décide donc de développer une nouvelle fonctionnalité qui permettrait d’associer les métadonnées supplémentaires aux documents extraits du même système d’information. Pour ce faire, elle met en place une méthodologie lui permettant de s’assurer de la conformité aux attentes des utilisateurs et à l’environnement technique tout au long du développement. Nous la présenterons en détaillant tout d’abord le fonctionnement et les méthodes employées par \gls{Archifiltre} au quotidien. Nous exposerons ensuite les étapes du développement de cette nouvelle fonctionnalité et les moyens utilisés afin que ce travail s’adapte aux besoins utilisateurs comme au cadre technique et normatif définit dans les premières parties de ce mémoire. Enfin, nous aborderons les étapes post-développement à mettre en place afin d'assurer l’adoption de cette fonctionnalité par les utilisateurs. \\
+
+
+\gls{Archifiltre} fait partie des \textit{startup} d’Etat portées par la Fabrique des Ministères sociaux\footnote{Cf. Introduction (\pageref{Introduction})}. Cette appartenance lui impose une certaine façon de travailler et notamment l’usage de l’\gls{agile} et du mode produit.
+
+
+\subsection{Le choix de l’agile et de l’approche produit}
+\gls{Archifiltre} a en effet adopté un fonctionnement basé sur la méthode \gls{agile} en la modifiant afin de la rendre conforme à l’équipe et ainsi plus facilement adaptable aux besoins utilisateurs. Cette organisation que l’on peut qualifier d’\gls{agile} souple découle de l’adoption du choix du mode produit à la place du mode projet, plus répandu au sein de l’administration française, correspondant à la dichotomie maîtrise d’ouvrage / maîtrise d'œuvre. Des formations à l’\gls{approche produit} sont notamment organisées par la Fabrique des Ministères sociaux\footcite{betagouv_guide_2024}. 
+
+
+Le principe essentiel de ce changement de paradigme est la volonté de replacer au centre des réflexions et des développements l’utilisateur et ses besoins\footnote{\cite{baheux_mode_2024}. Pour en savoir plus : \cite{sponheim_what_2024}}. En effet, en mode produit un des points d’attention principaux est la réponse aux besoins et la résolution des problèmes rencontrés par les utilisateurs. Le produit est considéré comme une proposition constamment testée par les utilisateurs. Le recueil du besoin et des retours utilisateurs prend donc une place importante dans le travail effectué.
+
+
+Par ailleurs, la différence entre ces deux méthodes de conduite de projet réside également dans l’organisation du travail\footcite[p.21]{betagouv_guide_2024}. En mode projet, la conception est séparée de l’exécution. Un cahier des charges est défini en amont par les équipes métiers. Il détaille et guide l’exécution du projet informatique par les équipes en charge des aspects opérationnels. En mode produit, l’équipe est pluridisciplinaire. Elle mêle des personnes avec des compétences métiers et des personnes chargées du développement et conçoit, construit et opère le produit en intégrant tout le monde à chaque étape.
+
+
+Enfin, le mode produit et le mode projet sont chacun généralement liés à une méthode de gestion de projet particulière. Le mode projet fonctionne en cycle en V et suit donc une feuille de route précise qui définit le calendrier et le budget alloué à chaque tâche.
+
+\clearpage
+
+
+\insererImage{0.5}{illustrations/figure13.png}{Schéma explicatif de l’organisation du cycle en V\protect\footnotemark}{figure13}
+\footnotetext{\cite[p.12]{betagouv_guide_2024}}
+
+
+Le mode produit tel qu’il est employé au sein de la Fabrique a quant à lui adopté la méthode \gls{agile}, suivant les principes du \textit{lean startup}\footnote{Cf. Annexe \ref{annexe5}}, afin de pouvoir s’adapter continuellement aux retours utilisateurs. En effet, la méthode \gls{agile} fonctionne en \enquote{\textit{sprint}}, c’est-à-dire en courtes sessions de travail (le plus souvent trois semaines), pour mener à bien une tâche. Au lieu de développer le projet à son maximum dès le début, les équipes vont adopter une méthode itérative et incrémentale\footcite{adam_agile_nodate}. Le but est donc de rendre opérable le plus rapidement possible un \gls{MVP} (\textit{Minimum Viable Product}), c’est-à-dire le minimum viable du produit souhaité. Les équipes vont ensuite continuer à développer le \gls{MVP} en l’améliorant petit à petit à chaque nouvelle version sortie en fonction des retours utilisateurs ce qui permet de réduire le risque d'échec ou d'erreur que l'on peut rencontrer sur des projets classiques. Cela permet également d'apporter de la valeur à l'utilisateur plus rapidement, comme l'illustre le schéma suivant, ce qui est important pour une \textit{startup} d'Etat qui a besoin de prouver sa valeur en continu pour justifier son existence et soutien auprès des sponsors.
+
+\clearpage
+
+\insererImage{0.3}{illustrations/figure14.png}{Comparatif d’un développement produit avec et sans \gls{MVP} \protect\footnotemark}{figure14}
+\footnotetext{\cite[p.27]{betagouv_guide_2024}}
+
+
+\gls{Archifiltre}, notamment en raison de sa nature de \textit{startup} d’Etat, a donc fait le choix de travailler en équipe resserrée mêlant différents métiers en plaçant au centre de leurs développements les retours utilisateurs selon les principes de l’approche produit. Ils se détachent ainsi de la méthode traditionnellement utilisée au sein de l’administration française, l’approche projet. 
+
+
+Avant de rentrer dans les détails du développement précis d’une fonctionnalité, il est important de présenter plus en détails l’équipe Archifiltre et sa méthode de travail. 
+
+\subsection{Présentation de l’équipe et de son fonctionnement}
+L’équipe est actuellement composée de Chloé Moser, \textins{\gls{Product Owner}} et archiviste, de Samuel Pirès, \textit{\gls{Product Manager}}, de Guillaume Lelasseur, développeur et de deux stagiaires archivistes, Manon Saget-Lethias, chargée de communication, et Mathilde Prades, chargée d’expertise fonctionnelle. Le rôle du \textit{\gls{Product Owner}} correspond à un chef de produit digital en mode \gls{agile} et se rapproche du rôle de chargée d'expertise fonctionnelle. Il est responsable de la définition et de la conception d'un produit selon la méthodologie \gls{agile}\footcite{lesparre_product_2023}. Le \textit{\gls{Product Manager}} est quant à lui défini comme \enquote{responsible for evaluating opportunities and determining what gets built and delivered to customers. We generally describe what needs to get built on the product backlog.}\footnote{Traduction : \enquote{chargé(e) d'évaluer les opportunités et de déterminer ce qui sera construit et livré aux utilisateurs. En général, ce qui doit être construit est décrit dans le \textit{backlog} du produit.} (\cite[pp.42-43]{cagan_inspired_2017})}. Le \textit{backlog} produit est une liste ordonnée de tâches, de fonctionnalités ou d'éléments devant être terminés dans le cadre de la feuille de route\footcite{raeburn_gestion_2024}. Ces deux rôles sont complémentaires au sein de l’équipe, d’autant plus que la \textit{\gls{Product Owner}} porte également le savoir archivistique indispensable au bon développement d’un tel outil. Le développeur quant à lui met en œuvre les spécifications définies par le \textit{\gls{Product Manager}}, la \textit{\gls{Product Owner}} et la chargée d'expertise fonctionnelle et les challenge techniquement. La chargée de communication fait vivre la communauté des utilisateurs notamment au travers d’organisation de challenge comme le \textit{Digital Clean Up Day}\footcite{moser_digital_2024} ou le Marathon du tri organisés en 2024 mais également de la tenue du site internet, de la \textit{newsletter} et des différents réseaux sociaux.
+
+
+Basé sur la méthode \gls{agile} souple employée par \gls{Archifiltre}, chaque semaine est organisée autour de réunions d’équipe ritualisées. Elle commence par un \textit{weekly}, une réunion durant laquelle un retour est fait sur les tâches que chaque membre de l’équipe s’était fixées la semaine précédente. Les tâches de la semaine à venir sont ensuite définies et inscrites dans le calendrier de la première page du \textit{Notion} dédié. L’équipe utilise en effet l’outil \textit{Notion}\footcite{noauthor_documentation_nodate} dans lequel elle organise son travail et centralise la majeure partie des documents produits. Chaque jour de la semaine suivant le \textit{weekly} comporte un \textit{daily}, réunion courte qui permet de partager le travail effectué par chacun, les tâches que chaque membre pense accomplir d’ici le \textit{daily} du lendemain et les éventuels besoins et problèmes rencontrés par les membres. 
+
+\subsection{Méthode double diamant}
+Plus spécifiquement, afin de mener à bien le développement de cette nouvelle fonctionnalité, l’équipe \gls{Archifiltre} s’est basée sur les principes de la méthode double diamant. Définie en 2003 par le \textit{UK Design Council}, la méthode dite du \enquote{double diamant}\footcite{design_council_double_nodate} a été pensée pour aider à l’innovation. Elle se compose de quatre étapes : 
+\begin{itemize}
+	\item La définition du besoin ou de la problématique.
+	\item La formalisation et la définition du projet.
+	\item Le test et l’itération des différents concepts.
+	\item Le développement du produit.
+\end{itemize}
+Ainsi, en règle générale, on considère que le premier diamant répond à l’affirmation \enquote{\textit{Make sure you build the right product}}\footnote{Traduction : Assurez-vous de construire le bon produit/la bonne solution.} et le deuxième \enquote{\textit{Make sure you build the product right}}\footnote{Traduction : Assurez-vous de le construire de la bonne façon.}.
+
+\insererImage{0.35}{illustrations/figure15.png}{Schéma explicatif de l’organisation de la méthode double diamant\protect\footnotemark}{figure15}
+\footnotetext{\cite{noauthor_innovation_nodate}}
+
+
+Pour le développement de cette fonctionnalité, l’équipe d’\gls{Archifiltre} s’est basée sur ces concepts en les adaptant spécifiquement à leur projet, se concentrant moins sur le suivi rigoureux du contenu de ces quatre étapes tel qu’il est défini par le \textit{UK Design Council} que sur le principe d’ouverture et de fermeture de cette méthodologie qui impose une certaine rigueur et oblige à passer par une logique d’exploration puis de recadrage systématiquement. Elle pousse ainsi l’équipe à étudier un maximum de cas de figure et à identifier des cas d'usages auxquels elle n’aurait pas pensés sans cela, ce qui est primordial dans le contexte spécifique de notre fonctionnalité afin de s’assurer qu’elle s’adapte correctement aux contraintes techniques et normatives de la chaîne de traitement.
+
+
+Ainsi, lors de la première étape correspondant à l’ouverture du premier diamant,  nous avons effectué plusieurs brainstormings mais également des entretiens utilisateurs et une étude des produits similaires existants (\textit{\gls{benchmark}}). Afin de cadrer les différentes idées et ainsi refermer ce premier diamant en y faisant le tri, le processus d’utilisation de la nouvelle fonctionnalité a été défini ainsi que la \textit{\gls{story map}}, concept qui sera détaillé ultérieurement, à l’aide de la confirmation recueillie lors de tests utilisateurs. C’est à la fin du premier diamant que l’on fait intervenir le développeur. Avec son aide et ses indications techniques, le deuxième diamant est ouvert notamment au sujet de la définition de l’expérience et de l'interface utilisateur (\gls{UX} et \gls{UI}) car le développeur d’\gls{Archifiltre} a également une compétence d’UX designer. Le processus d’utilisation de l’application confirmé par l’étape précédente est alors transformé en une succession de \textit{\gls{wireframe}s}, maquettes de chaque écran que rencontrera l'utilisateur dans l’utilisation de cette fonctionnalité. Ces \textit{\gls{wireframe}s} sont testés et corrigés au moyen de nouveaux tests utilisateurs avant d’être approuvés. La dernière étape consiste alors à rédiger l’ensemble des spécifications destinées à guider le développeur dans son travail afin qu’il construise ce qui a été testé et défini tout au long de cette méthodologie.
+
+Une attention particulière est donc mise sur le développement de l’\gls{UX} et de l'\gls{UI} qui occupe l’ensemble du travail du deuxième diamant. En effet, la volonté d’\gls{Archifiltre} de proposer une utilisation la plus simple et claire possible est ce qui démarque l’application aujourd’hui parmi les différents outils d’archivage électronique. Ainsi, il est primordial pour l’équipe de conserver cette identité qui a favorisé son adoption par les professionnels de l’information et donc d’y accorder une grande importance dans la construction de cette nouvelle fonctionnalité.
+
+
+Cet ensemble de méthodes constitue alors le socle sur lequel s’appuient les différents travaux nécessaires au bon développement de notre nouvelle fonctionnalité. Elles mettent au centre des préoccupations la flexibilité et l’adaptabilité afin de correspondre au mieux aux besoins utilisateurs. 

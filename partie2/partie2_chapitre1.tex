@@ -1,0 +1,86 @@
+\chapter{Le SEDA et son fonctionnement}
+
+Une chaîne de traitement se met donc en place au sein des services d’archives des ministères. Au cœur de cette chaîne se trouvent les données qui constituent la source de l’information de l’archive numérique\footnote{Pour en savoir plus sur les données au coeur du fichier numérique, voir \cite[pp.253-256]{nguyen_chapitre_2020}.}. Ces dernières peuvent prendre de nombreuses formes différentes. Afin de garantir leur intégrité et leur pérennité, un standard est créé : le Standard d’échange des données archivistiques ou \gls{SEDA} dont les lieux d'action sont résumés par le schéma suivant\footcite{nichele_formation_2022} : 
+
+\insererImage{0.4}{illustrations/figure9.png}{Schéma des lieux d’actions du \gls{SEDA} au sein de la chaîne d’archivage électronique}{figure9}
+
+
+\subsection{Historique du SEDA : construction et évolution}
+Le Standard d'Échange de Données pour l'Archivage (\gls{SEDA}) a vu le jour afin de répondre au besoin d’un cadre normatif pour les échanges de données entre services publics d’archives et leurs partenaires. Son élaboration a débuté en 2005 par une collaboration entre la direction des archives de France (DAF) et l'ancienne Agence pour le Développement de l'Administration Électronique (ADAE), dans le cadre de l'action 103 du programme ADELE (Administration électronique). Cette collaboration s’est poursuivie par des échanges suite à un appel à commentaires clôturé le 23 décembre 2005, suivi d'ateliers entre décembre 2005 et janvier 2006\footcite{cines_oais_2019}. Cela a permis de fortement généraliser le début de standard qu’était alors le \gls{SEDA} en s'appuyant non seulement sur ces échanges mais également sur des normes existantes comme le langage \gls{XML} (\textit{eXtensible Markup Language}), la norme ISO 14721 (modèle \gls{OAIS}), la \gls{DTD} \gls{EAD} (Description archivistique encodée) et la norme NF Z 42-013 sur l’archivage électronique\footcite[p.63]{gueit-montchal_chapitre_2020}.  
+
+
+Le \gls{SEDA} passe ensuite de standard à norme avec sa transposition à la norme NF Z44 0-22 \enquote{Modélisation des échanges de données pour l’archivage} (MEDONA) en janvier 2014. Ce passage à la norme nationale puis internationale, avec la normalisation à l'ISO qui a abouti à la norme ISO 20614 \enquote{ Protocole d'échange de données pour l'interopérabilité et la préservation} (DEPIP), l’a fait évoluer : le standard qui était d’abord spécifique aux archives publiques s’est élargi pour pouvoir être appliqué plus largement\footcite{b2c_dstandard_2018}. C’est à partir des élargissements donnés au \gls{SEDA} à travers ces processus de normalisation auxquels s'ajoutent notamment les réflexions de l'équipe du Programme \gls{VITAM} que s’élabore le \gls{SEDA} 2\footcite{jacobson_standard_2014}. Il prend en compte les modifications adoptées par le \gls{SEDA} pour son passage à la norme MEDONA et les comités de pilotage du \gls{SEDA} 2 le spécialisent de nouveau pour le cas des archives publiques. Ce travail aboutit à la publication de sa version 2.0 en décembre 2015.
+
+
+\subsection{Organisation globale du SEDA : but}
+
+Le \gls{SEDA} repose sur plusieurs schémas \gls{XSD}, consultables sur le site \href{https://francearchives.gouv.fr/seda/2.2/documentation/html/seda-2.2-main.html }{FranceArchives}, et vise à faciliter l’interopérabilité entre les systèmes d’information des services d’archives et ceux de leurs partenaires. Il modélise sept transactions spécifiques liées à l'archivage de documents ou données électroniques entre le service versant, le service d’archives et des tierces entités : 
+\begin{itemize}
+	\item le transfert, 
+	\item la demande de transfert, 
+	\item l’élimination, 
+	\item la communication, 
+	\item la demande d’autorisation, 
+	\item la modification,
+	\item la restitution. 
+\end{itemize}
+
+
+Ces transactions impliquent six acteurs principaux : 
+\begin{itemize}
+	\item le service producteur, 
+	\item le service versant, 
+	\item le service d'archives, 
+	\item le service de contrôle, 
+	\item le demandeur d'archives, 
+	\item l'opérateur de versement, depuis la version 2.0\footcite[pp.34-35]{dieng_qualite_2020}.
+\end{itemize}
+
+
+Les formats, structures et contenus informationnels échangés sont clairement définis dans le standard. Par ailleurs, le \gls{SEDA} bénéficie d'une structure modulaire permettant une adaptation aux différents besoins et est mis à jour régulièrement depuis la reprise des travaux en 2020 afin d’intégrer les besoins exprimés par les membres du comité de pilotage\footcite{noauthor_standard_2024}. La dernière version du \gls{SEDA}, la 2.3, est d’ailleurs parue fin juillet 2024, alors que ce travail est en cours de rédaction, et la documentation associée devrait être publiée d’ici la fin de l’année 2024. 
+
+\subsection{Description technique de l’organisation du SEDA 2.2}
+
+Cette organisation conceptuelle globale est concrètement mise en œuvre dans le schéma \gls{XML} au travers de ses balises et de leur organisation. En effet, les balises du \gls{SEDA} sont organisées en 4 types de métadonnées : 
+\begin{itemize}
+	\item les \textbf{métadonnées techniques} qui décrivent les aspects techniques des documents archivés, comme le format de fichier, la taille, le logiciel utilisé pour créer ou modifier les documents, les spécifications de numérisation et les informations sur l'intégrité des données (par exemple, les sommes de contrôle ou les signatures numériques). Ces métadonnées permettent de garantir que les documents peuvent être correctement lus et interprétés sur le long terme, indépendamment des évolutions technologiques.
+	\item les \textbf{métadonnées de gestion} qui sont employées pour administrer et surveiller les documents au cours de leur cycle de vie archivistique. Elles incluent des informations sur les règles de conservation, les droits d'accès, les politiques de gestion des archives, les actions effectuées sur les documents (comme les transferts ou les éliminations) et les responsables des différentes actions. Ces métadonnées garantissent la bonne gestion et la traçabilité des documents archivés.
+	\item les \textbf{métadonnées de transport} qui sont liées au transfert physique ou électronique des documents entre différents systèmes ou entités. Elles contiennent des informations sur l'expéditeur, le destinataire, le format de transfert, la date et l'heure de l'envoi, ainsi que des accusés de réception. Ces métadonnées assurent l'intégrité et la sécurité des documents lors de leur transfert et facilitent le suivi des échanges.
+	\item les \textbf{métadonnées de description} qui contiennent des informations contextuelles et descriptives sur les documents archivés (titre, auteur, date de création, etc.) dont l’organisation est inspirée de la norme \gls{ISAD(G)} (\textit{International Standard Archival Description - General}) et de sa déclinaison technique l’\gls{EAD}. Ces métadonnées permettent de comprendre le contenu et la provenance des documents, facilitant ainsi leur recherche et leur identification dans le système d'archivage.
+\end{itemize}
+
+
+Par ailleurs, en plus de ces 4 types de métadonnées, il existe des balises qui décrivent le type de message en fonction de la raison de l’échange de données. Elles sont essentielles pour structurer et gérer les différents types de messages échangés dans le cadre du \gls{SEDA} et ainsi garantir une communication standardisée et efficace entre les divers acteurs du processus d'archivage. Les balises sont les suivantes : 
+\begin{itemize}
+	\item <BusinessMessageType> (message de transfert), balise utilisée pour initier le transfert de documents ou de données d'un service versant vers un service d'archives.
+	\item <BusinessMessageReplyType> (message de demande de transfert), balise utilisée pour répondre à une demande de transfert, indiquant l'acceptation ou le rejet de la demande initiale.
+	\item <BusinessRequestMessageType> (message d'élimination), balise utilisée pour demander l'autorisation de détruire des documents archivés.
+	\item <BusinessRequestMessageType> (message de communication), balise utilisée pour demander l'accès à des documents archivés.
+	\item <BusinessRequestMessageType> (message de demande d’autorisation), balise utilisée pour demander l'autorisation de réaliser une action spécifique sur des documents archivés.
+	\item <BusinessMessageType> (message de modification), balise utilisée pour notifier une modification sur des documents archivés ou sur leurs métadonnées.
+	\item <BusinessRequestMessageType> (message de restitution), balise utilisée pour demander la restitution de documents archivés à leur service d'origine ou à une autre entité.
+	\item <Acknowledgement> (message d'accusé de réception), balise utilisée pour accuser réception d'un message, confirmant qu'il a été reçu et traité.
+\end{itemize}
+
+
+Dans ce cadre, il existe 4 balises communes à tous les types de messages : <Comment>, <Date>, <Message Identifier> et <Signature> dont seules <Date> et <MessageIdentifier> sont obligatoires et sont toujours positionnées en début de \textit{\gls{manifest}}\footcite[pp.43-45]{siaf_dictionnaire_2022}.
+
+
+Enfin, les différents types de métadonnées sont liés entre eux par des systèmes de références (id) qui permettent de garder associées les différentes métadonnées qui renvoient au même fichier (binaire) archivé. 
+
+\subsection{Le champ d’action de l’utilisateur sur le SEDA dans le cadre de la chaîne de traitement définie}
+Dans le cadre de la chaîne de traitement définie dans la première partie de ce travail, l’utilisateur manipule des données qui se présentent soit sous la forme de documents soit sous la forme de métadonnées associées soit sous la forme de base de données. Ces données sont ordonnées à l’aide du schéma \gls{XML} \gls{SEDA} au cours de la chaîne de traitement. Pour l’utilisateur, il n’est pas nécessaire de comprendre l’entièreté des balises exactes enrichies et la logique pleine du \gls{SEDA} derrière l’interface des outils, bien qu’il reste aujourd’hui important d’en maîtriser les bases logiques, les outils n’effaçant pas totalement la présence de ce standard d’échange.
+
+
+Au sein d’\gls{Archifiltre}, seules les sous-balises de la balise <ArchiveUnit> sont enrichies. Chaque document intellectuel est une \enquote{\textit{Archive Unit}} ou \enquote{\gls{unité d’archives}} (UA). Au sein de cette balise, il est donc possible d’ajouter toutes les informations spécifiques à cette entité intellectuelle. \gls{Archifiltre} se concentre sur l’enrichissement de la balise <content>, définie dans le dictionnaire du \gls{SEDA} 2.2 comme un \enquote{bloc de « Contenu » de l’\gls{unité d’archives} qui contient toutes ses métadonnées de description}\footcite[p.13]{siaf_dictionnaire_2022}. Au sein de l’outil ReSIP, cette balise est nommée \enquote{descriptif}. Archifiltre permet dans son \enquote{export Resip} le chargement de l’arborescence ainsi que l’enrichissement automatique des sous-balises de <content> dans cet outil. 
+
+
+Au sein de ReSIP, il est par ailleurs possible d’enrichir une autre sous-balise de la balise <ArchiveUnit>, <management> définie dans le dictionnaire du SEDA 2.2 comme \enquote{Métadonnées de gestion associées à une \gls{unité d’archives}}\footcite[p.13]{siaf_dictionnaire_2022}. L’ensemble des sous-balises de <content> et <management> est listé en annexe\footnote{Cf. Annexes \ref{annexeb} et \ref{annexec}} avec leur traduction française dans ReSIP et  leur définition. Dans l’outil ReSIP, il est également possible de remplir les métadonnées communément appelées \enquote{métadonnées d’en-tête}. Ces métadonnées sont liées au type de message et incluent notamment les quatres balises communes à tous les types de messages précédemment détaillées. Ces métadonnées sont complétées dans l’onglet \enquote{Métadonnées globales} de l’onglet \enquote{Editer les informations d’export}. Les métadonnées de transports sont quant à elles en partie renseignées et modifiables dans ce même onglet au deuxième volet, accompagnées de certaines métadonnées associées au type de message et des métadonnées globales de gestion qui s’appliquent à l’ensemble du versement et non pas à une archive spécifique.
+
+\insererImage{0.35}{illustrations/figure10.png}{Onglet \enquote{Editer les informations d’export} de ReSIP}{figure10}
+
+
+Enfin, au-delà des nombreuses informations que le \gls{SEDA} permet d’organiser et de pérenniser dans ses différentes balises, le schéma permet également l’extension à des balises d’autres schémas \gls{XML} comme par exemple l’\gls{EAD}, le \textit{Dublin Core} ou encore METS (\textit{Metadata Encoding and Transmission Standard}) afin d’assurer la prise en compte totale de tous ses usages. Néanmoins, cette utilisation est rendu impossible par les outils de la chaîne de traitement et par les différentes versions du \gls{SAE} \gls{VITAM}, notamment celui des Archives nationales, dans lesquels ce type d’extensions sont bloquées. La volonté d’exhaustivité du \gls{SEDA} est également limitée par certaines règles définies dans ces outils qui le contraignent davantage. Lorsque l’on verse dans ADAMANT, le \gls{SAE} des Archives nationales, il n’est par exemple pas accepté d’avoir un \textit{\gls{manifest}} dans lequel la balise <CustodialHistory> (Historique de conservation) aurait plus d’une seule sous-balise <CustodialHistoryItem>. Ainsi, malgré son apparente adaptabilité, la pratique du \gls{SEDA} peut s’avérer plus limitante suivant les choix des structures qui l’ont implémenté. 
+
+
+Ainsi, le \gls{SEDA} permet d’assurer la pérennité et l’intégrité des métadonnées lors de leurs échanges au cours de la chaîne de traitement des archives. Néanmoins, son utilisation reste compliquée à la fois par les outils de la chaîne de traitement qui le limitent et par la difficulté que sa prise en main représente pour un grand nombre d’archivistes aujourd’hui. 

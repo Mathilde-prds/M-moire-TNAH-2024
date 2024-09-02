@@ -1,0 +1,430 @@
+%Document aux normes de l'École nationale des Chartes
+%Dernières modifications M. Prades (08/2024)
+
+%%%%%%%%%%%%%%%%%%%%%% PRÉAMBULE
+
+
+%%%%%%%%%%%%%% partie obligatoire du préambule
+\documentclass[a4paper,12pt,twoside]{book}
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage[french]{babel}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGES UTILISÉS
+
+\usepackage{csquotes} % les guillemets français
+\usepackage{lettrine} %faire une lettrine
+
+\usepackage[style=enc,sorting=nyt,maxbibnames=10, backend=biber]{biblatex}%utiliser le style de l'EnC
+\addbibresource{./bibliographie/Mémoire.bib}
+\nocite{*}
+
+%%%Faire un ou plusieurs index
+
+%\usepackage{imakeidx} %pour faire un ou plusieurs index
+%\makeindex %commande pour générer l'index
+
+
+%PACKAGES AJOUTÉS
+% Réinitialiser le compteur de chapitres à chaque nouvelle partie
+%\usepackage{etoolbox}
+%\pretocmd{\part}{\setcounter{chapter}{0}}{}{}
+% Permet l'insertion d'images
+\usepackage{graphicx}
+% Permet d'insérer des PDF externes (pour mes annexes)
+\usepackage{pdfpages}
+%Permet d'inclure des pages au format paysage
+\usepackage{lscape}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONFIGURATION DE MISE EN PAGE
+
+
+%%%%%% Les compteurs (sections, subsections, etc)
+
+\renewcommand{\thesection}{\Roman{section}.}%On ne fait apparaître que le numéro de la section
+\renewcommand{\thesubsection}{\arabic{subsection}.}%subsection en chiffres arabes
+\renewcommand{\thesubsubsection}{\alph{subsubsection}.}%subsubsection en lettres minuscules
+%Pour faire apparaître les subsubsection dans le table des matières
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}  % La subsubsection (profondeur=3 dans la table des matières) apparait numérotée dans la TdM
+
+
+
+%%%%%  Configurer le document selon les normes de l'école
+
+\usepackage[margin=2.5cm]{geometry} %marges
+\usepackage{setspace} % espacement qui permet ensuite de définir un interligne
+\onehalfspacing % interligne de 1.5
+\setlength\parindent{1cm} % indentation des paragraphes à 1 cm
+
+%%%%% Mise en forme des headers (haut de page)
+
+\usepackage{fancyhdr} %package utilisé pour modifier les headers
+\pagestyle{fancy} %utiliser ses propres choix de mise en page et non ceux par défaut du package
+
+\setlength\headheight{16pt}%la hauteur des headers
+\renewcommand{\sectionmark}[1]{\markright{\small\textit{\thesection~\  #1}}}%Faire apparaître dans les headers les sections en  petit et en italiques
+%\renewcommand{\sectionmark}[1]{}%Commenter la ligne précédente et mettre celle-ci pour ne pas avoir le titre des sections dans le header
+\renewcommand{\chaptermark}[1]{\markboth{\small\chaptername~\thechapter~--\ \textit{#1}}{}}%idem pour les chapitres
+
+
+
+%%%%%%% Package hyperref
+% A mettre après les autres appels de packages car redéfinit certaines commandes).
+
+\usepackage[colorlinks=false, breaklinks=true, pdfusetitle, pdfsubject ={Mémoire TNAH - Développement d'une fonctionnalité d'import de métadonnées pour l'archivage des systèmes d'information}, pdfkeywords={gestion de projet ; OAIS ; SEDA ; Archifiltre ; Système d'information ; VITAM ; mode produit ; méthode agile ; archives numériques}]{hyperref} %voir hidelinks pour cacher encadré des liens mais le commenter attention dans la liste en dessous
+\usepackage[numbered]{bookmark}%va avec hyperref; marche mieux pour les signets. l'option numbered: les signets dans le pdf sont numérotés
+
+%Explication des options de hyperref (modifiables)
+% hyperindex=false
+% colorlinks=false: pour que le cadre des liens n'apparaisse pas à l'impression
+% breaklinks permet d'avoir des liens allant sur pusieurs lignes
+%pdfusetitle: utiliser \author et \title pour produire le nom et le titre du pdf
+
+
+
+%%%%%%%%%%%%%%%%%%%% Package glossaries
+
+%Exception: il faut le charger APRÈS hyperref
+\usepackage[toc=true]{glossaries}
+\makeglossaries
+%avec TexStudio: F9 pour compiler le glossaire
+
+\loadglsentries{glossaire.tex}
+
+
+%%%%%%%%%%%%%%%%%% DÉFINITION DES COMMANDES ET ENVIRONNMENTS
+
+% Nouvelle commande permettant d'ajouter des images plus rapidement. 
+% La commande se nomme \insererImage, elle demande de rensigner 4 arguments : #1 la taille de l'image (inférieur à 1 pour réduire sa taille originale et supérieure à 1 pour l'augmenter), #2 le lien vers l'image (ex : annexes/image1.png), #3 la légende de l'image et #4 le nom de son label (servant pour les références).
+\newcommand{\insererImage}[4]{ 
+	\begin{figure}[h] 
+		\centering 
+		\includegraphics[scale=#1]{#2} 
+		\caption{#3} 
+		\label{#4} 
+	\end{figure} }
+% Pour se servir de cette commande, utiliser la formulation : \insererImage{#1}{#2}{#3}{#4}
+
+
+ %%%%%%%%%%%%%% INFORMATIONS POUR LA PAGE DE TITRE
+\author{Mahilde PRADES - M2 TNAH}
+\title{Titre du mémoire}
+
+%%%%%%%%%%%%%%%%%%%%%% DOCUMENT
+\begin{document}
+	\begin{titlepage}
+		\begin{center}
+			
+			\bigskip
+			
+			\begin{large}				
+				ÉCOLE NATIONALE DES CHARTES\\
+				UNIVERSITÉ PARIS, SCIENCES \& LETTRES
+			\end{large}
+			\begin{center}\rule{2cm}{0.02cm}\end{center}
+			
+			\bigskip
+			\bigskip
+			\bigskip
+			\begin{Large}
+				\textbf{Mathilde PRADES}\\
+			\end{Large}
+		
+			\begin{normalsize} \textit{licenciée ès lettres}
+			\end{normalsize}
+			
+			\bigskip
+			\bigskip
+			\bigskip
+			
+			\begin{Huge}
+				\textbf{DÉVELOPPEMENT D'UNE FONCTIONNALITÉ D'IMPORT DE MÉTADONNÉES POUR L'ARCHIVAGE DES SYSTÈMES D'INFORMATION}\\
+			\end{Huge}
+			\bigskip
+			\bigskip
+			\begin{LARGE}
+				\textbf{Cas d'usage de l'application Archifiltre}\\
+			\end{LARGE}
+			
+			\bigskip
+			\bigskip
+			\bigskip
+			\begin{large}
+			\end{large}
+			\vfill
+			
+			\begin{large}
+				Mémoire 
+				pour le diplôme de master \\
+				\enquote{Technologies numériques appliquées à l'histoire} \\
+				\bigskip
+				2024
+			\end{large}
+			
+		\end{center}
+	\end{titlepage}
+
+	\thispagestyle{empty}	
+	\cleardoublepage 
+	
+\frontmatter
+
+	\chapter{Résumé}
+\medskip
+	\textbf{Résumé : }
+	
+	
+	Ce mémoire a été réalisé à l'occasion d'un stage au bureau des archives des Ministères sociaux au sein de l’équipe Archifiltre du mois d'avril à août 2024, dans le cadre du Master \enquote{Technologies numériques appliquées à l'histoire} de l'École nationale des chartes. Il porte sur le moyen de faire évoluer un outil numérique tout en respectant le cadre technique mis en place au fur et à mesure par le milieu archivistique français pour le traitement des archives numériques au sein des ministères. Il présente le cadre technique et normatif, historiquement et techniquement, et expose la méthodologie de gestion de projet mise en œuvre afin d’adapter l’application Archifiltre à la complexité de l’archivage des systèmes d’information. Ce mémoire vise à présenter les réflexions autour des contraintes, enjeux et méthodes permettant l’évolution d’un outil numérique de traitement archivistique dans le respect des normes et de la chaîne de traitement établie.
+	
+	
+	\textbf{Abstract : }
+	
+	
+	This thesis was completed during an internship at the Archives Office of the Social Ministries within the Archifiltre team, from April to August 2024, as part of the Master’s program in Digital Technologies Applied to History (TNAH) at the École nationale des chartes. It focuses on how to evolve a digital tool while adhering to the technical framework progressively established by the French archival sector for the processing of digital archives within ministries. The thesis presents the technical and normative framework, both historically and technically, and outlines the project management methodology implemented to adapt the Archifiltre application to the complexity of archiving information systems. The aim of this thesis is to present the reflections on the constraints, challenges, and methods that enable the evolution of a digital archival processing tool while respecting the established standards and processing chain.
+	\\
+	
+	\textbf{Mots-clés:} gestion de projet ; OAIS ; SEDA ; Archifiltre ; Système d'information ; VITAM ; mode produit ; méthode agile ; archives numériques. 
+	
+	\textbf{Informations bibliographiques:} Mathilde PRADES, \textit{Développement d'une fonctionnalité d'import de métadonnées pour l'archivage des systèmes d'information. Cas d'usage de l'application Archifiltre}, mémoire de master \enquote{Technologies numériques appliquées à l'histoire}, dir. Emmanuelle BERMES, École nationale des chartes, 2024.
+	
+		\newpage{\pagestyle{empty}\cleardoublepage}
+	
+	\chapter{Remerciements}
+	
+\lettrine{E}n préambule de ce travail, je tenais à remercier tous ceux qui m'ont accompagnée tout au long de ce master et du stage qui l'a conclu pour leurs enseignements précieux. 
+Mes remerciements vont tout d'abord à Emmanuelle Bermès, responsable pédagogique du master \enquote{Technologies numériques appliquées à l’histoire}, pour la qualité de ses enseignements, sa disponibilité et sa bienveillance dans son accompagnement tout au long de l'écriture de ce mémoire comme de l'année. Je remercie également toute l'équipe Archifiltre ainsi que les agents du bureau des archives des Ministères sociaux qui m'ont accueillie et fait confiance. J'ai énormément appris de chacun d'entre eux. 
+Toute ma gratitude va à Chloé Moser, \textit{Product Owner} et intrapreneure d'Archifiltre, qui m'a accompagnée avec bienveillance tout au long de ce stage et qui n’a cessé de me prodiguer d’excellents conseils.
+Je voudrais également remercier Samuel Pirès, \textit{Product Manager} d'Archifiltre, pour ses enseignements précieux et innovants sur la gestion de projet. 
+Merci à Manon Saget-Lethias, stagiaire chargée de communication au sein d'Archifiltre, pour sa compagnie et le partage de son savoir tout au long de ce stage.
+Je remercie également Anne Lambert, cheffe du bureau des archives des Ministères sociaux, pour sa confiance et le partage de ses connaissances sur le monde des archives.
+Merci beaucoup à Edouard Vasseur, professeur d’Archivistique, diplomatique et histoire des institutions de l’époque contemporaine à l'École nationale des chartes, de m'avoir accordé un entretien dans le cadre de ce mémoire et, plus largement, pour la qualité de son enseignement en archivistique au cours de ce master. 
+Je remercie Louis Vignaud, expert chargé de la politique nationale sur les métadonnées et référentiels archivistiques au SIAF, pour son partage  d'informations concernant le SEDA. 
+Finalement, je voulais témoigner ma reconnaissance à Emmanuelle Bermès, Chloé Moser et Samuel Pirès pour leur relecture et leurs conseils.
+
+	\newpage{\pagestyle{empty}\cleardoublepage}
+	
+	
+	
+%%%%%%%%%%%% \bibliographie ici (normes de l'EnC)
+\chapter{Bibliographie}
+\section*{Généralités}
+\printbibliography[keyword={généralités},heading=none]
+\section*{Documentation technique}
+\printbibliography[keyword={document technique},heading=none]
+\section*{Archivage électronique}
+\printbibliography[keyword={Archivage électronique},heading=none]
+\section*{Gestion de projet}
+\printbibliography[keyword={gestion de projet},heading=none]
+\section*{SEDA}
+\printbibliography[keyword={SEDA},heading=none]
+\section*{VITAM}
+\printbibliography[keyword={VITAM},heading=none]
+\nocite{*} %Permet d'afficher dans la bibliogrpahie les quelques références générales qui ne sont pas indiquées en note de bas de page dans le corps du mémoire.
+	
+\chapter{Introduction}	
+\label{Introduction}
+
+L’AFNOR définit l’archivage électronique comme \enquote{l’ensemble des actions, outils et méthodes mis en œuvre pour conserver à moyen et long terme des informations dans le but de les exploiter}. Il s’agit d’un processus incluant non seulement le stockage, la sauvegarde et la gestion électronique des documents, mais aussi \enquote{l’identification, la collecte, le classement et la conservation des informations en vue de consultations ultérieures, sur un support adapté et sécurisé, pour la durée nécessaire à la satisfaction des obligations légales ou des besoins d’information}\footcite{abbassi_stage_2009}. Ainsi, pour garantir le traitement, la conservation et la pérennisation des archives électroniques dans la continuité de l’existant pour les archives papier, il a été nécessaire de créer un cadre, des normes et des standards spécifiques\footcite[pp.61-64]{gueit-montchal_chapitre_2020}, soutenus par d'importants financements de l’État et une volonté affirmée de progrès dans ces domaines.
+
+
+En effet, dès les années 1980, la production d’archives numériques commence à émerger. À mesure que l’électronique prend une place croissante dans notre société et au sein des institutions, ce que Marie-Anne Chabin nomme la \enquote{mue digitale}\footcite{chabin_transformation_2017}, les spécialistes de la gestion d’informations comprennent la nécessité de créer un cadre pour la gestion et la pérennisation de l’information numérique, comparable à celui existant pour les archives papier. Aujourd’hui, les archivistes disposent d’un cadre normatif et d’une méthodologie élaborée pour répondre aux besoins de l’archivage numérique. Cependant, le cadre technique et normatif doit évoluer en permanence, aussi rapidement que les changements liés au numérique. Cette évolution repose sur le cadre initialement défini au début des années 2000\footcite[p.5]{nichele_preparer_2021}, tout en continuant à l'adapter. Ainsi, il est crucial de se demander comment faire évoluer les outils de traitement et de versement des archives numériques tout en respectant le cadre établi sur lequel reposent ces pratiques.
+
+
+Pour répondre à cette problématique, nous nous intéresserons plus spécifiquement au cas de la chaîne de traitement pratiquée au sein des Ministères sociaux et de la plupart des missions archives en ministères : le traitement des archives numériques via \gls{Archifiltre} puis la création de paquets de documents avec ReSIP (Réaliser et Editer des \gls{SIP}) et le versement dans le système d’archivage électronique (\gls{SAE}) \gls{VITAM} (Valeurs immatérielles transmises aux archives pour mémoire). Notre réflexion porte notamment sur les méthodologies de gestion de projet et se construit sur une pratique concrète effectuée lors d’un stage de quatre mois avec l’équipe d’\gls{Archifiltre} au sein des Ministères sociaux. Archifiltre\footnote{\href{https://archifiltre.fr/}{https://archifiltre.fr/}} est une startup d’Etat\footnote{D’après le guide de lancement des startups d’Etat de beta.gouv, \enquote{une Startup d’État est une équipe dédiée et autonome qui développe une solution à un problème de politique publique dans une approche incrémentale. Elle est financée par l’administration porteuse de cette politique, sur la base de son impact. Elle n’a pas pour objectif de faire du profit et n’a souvent pas de personnalité juridique propre – même si elle peut devenir une association, un GIP ou un service au sein d’une administration.} Pour en savoir plus : \href{https://beta.gouv.fr/content/docs/guide.pdf}{https://beta.gouv.fr/content/docs/guide.pdf}} qui propose un outil gratuit et open-source d’analyse et de pré-versement des archives numériques\footnote{\enquote{L’objectif d’Archifiltre est de proposer à tout utilisateur de fichiers bureautiques un outil de visualisation d’arborescences complètes afin de pouvoir les appréhender rapidement en vue de les décrire, les organiser, les trier et aussi les enrichir en apportant de la contextualisation et de la qualification aux documents.}(\cite{naud_trois_2019})}. Elle est portée par l’incubateur de startups des Ministères sociaux qui soutient également d’autres startup comme France VAE\footnote{Startup d’Etat dont le but est de faciliter l’obtention d’un diplôme en Validation des Acquis d’Expérience (VAE). Pour en savoir plus : \href{https://www.fabrique.social.gouv.fr/nos-startups/france-vae}{https://www.fabrique.social.gouv.fr/nos-startups/france-vae}} ou Oz Ensemble\footnote{Startup d’Etat dont le but est de d’offrir à tous un accès simple aux soins en addictologie. Pour en savoir plus : \href{https://www.fabrique.social.gouv.fr/nos-startups/oz-ensemble}{https://www.fabrique.social.gouv.fr/nos-startups/oz-ensemble}} et qui se nomme la Fabrique numérique\footnote{ \href{https://www.fabrique.social.gouv.fr/}{https://www.fabrique.social.gouv.fr/}}. Le but de la Fabrique est d’encourager l’innovation numérique au sein des Ministères sociaux. Les équipes de la Fabrique accompagnent les produits numériques qui répondent à un problème de politique publique en donnant un cadre technique aux startups. \gls{Archifiltre} est également soutenue par le service interministériel des archives de France (SIAF) et par la direction des finances, des achats et des services (DFAS) des Ministères sociaux, direction à laquelle appartient le bureau des archives. Par ailleurs, plusieurs acteurs d’\gls{Archifiltre} sont à la fois en poste au sein de l’équipe et archivistes au sein du service des Ministères sociaux ce qui leur permet de garder un lien très étroit avec la pratique concrète et l’évolution actuelle du métier. Au cours de ce stage, de nombreuses missions ont été menées, notamment le développement d’une nouvelle fonctionnalité pour l’application \gls{Archifiltre} permettant de traiter les métadonnées issues des systèmes d’information en vue de leur archivage. Ce travail a permis d’alimenter ce mémoire en s’inscrivant pleinement dans la problématique du besoin d’évolution des outils archivistiques afin de pouvoir continuer le traitement d’archives sous leurs nouvelles formes, ici les systèmes d’information.
+
+
+Ainsi, nous reviendrons d’abord sur la mise en place des composantes techniques et normatives qui construisent la chaîne de traitement établie des services d’archives des ministères en détaillant dans un premier temps le modèle conceptuel selon lequel les systèmes d’archivage électroniques sont pensés en France. Nous verrons ensuite la manière dont la France s’est appropriée ce modèle et a construit ses propres outils et normes selon ces principes. La chaîne de traitement et sa logique ainsi détaillée, nous pourrons alors présenter la manière dont \gls{Archifiltre} s’y est insérée et le rôle qu’elle y joue. 
+
+
+La présentation de cette chaîne de traitement nous permettra ensuite de nous concentrer sur son objet principal : les données. En effet, les données et leur forme constituent la problématique centrale de l’archivage numérique, c’est leur intégrité et leur pérennité que l’on doit assurer. Ainsi, nous présenterons les détails du standard d’échange de données pour l’archivage (\gls{SEDA}) qui leur sert de cadre et qui permet de répondre aux impératifs de l’archivage. Nous rentrerons ensuite en détail dans les formes que prennent les données et notamment dans la spécificité des données au sein des systèmes d’information. Nous aborderons la complexité de l’archivage des données au travers de l’expérience des Ministères sociaux et de plusieurs exemples qu’ils ont pu rencontrer. 
+
+
+Enfin, notre réflexion nous mènera à présenter la manière dont l’équipe \gls{Archifiltre} a fait évoluer son outil afin de faciliter l’archivage des systèmes d’information tout en s’adaptant et en faisant en sorte de s’insérer dans la chaîne de traitement mise en place au sein des ministères et en respectant le standard d’échange défini en France. Pour ce faire, nous présenterons d’abord le fonctionnement général d’\gls{Archifiltre} avant de détailler point par point les étapes de la mise en place d’une nouvelle fonctionnalité répondant aux exigences susmentionnées. 
+
+
+
+
+
+\newpage{\pagestyle{empty}\cleardoublepage}
+
+%%%%%%%%%%%%%%%%%Le corps du mémoire
+	\mainmatter
+%Trier par dossiers si besoin (front, main,annexes,), se crérer un docuemnt .tex par structure (section ou chapter selon la taille et la pertinence) Exemple de chemin à partir du dossier où se trouve le document maître: ./dossierA/fichier.tex
+
+	
+
+	\part{Description historique de la mise en place de la chaîne de traitement des services d’archives des Ministères}
+ 
+\input{partie1/partie1_chapitre1.tex} %Input: importer un fichier
+\input{partie1/partie1_chapitre2.tex}
+\input{partie1/partie1_chapitre3.tex}
+
+	
+	\part{La gestion des données de la chaîne de traitement des archives des ministères}
+	
+	
+\input{partie2/partie2_chapitre1.tex}
+\input{partie2/partie2_chapitre2.tex}
+
+
+	\part{La mise en place d’une nouvelle fonctionnalité pour Archifiltre}
+	
+	
+\input{partie3/partie3_chapitre1.tex}
+\input{partie3/partie3_chapitre2.tex}
+\input{partie3/partie3_chapitre3.tex}
+\input{partie3/partie3_chapitre4.tex}
+\input{partie3/partie3_chapitre5.tex}
+
+
+
+	\chapter*{Conclusion}
+	\addcontentsline{toc}{chapter}{Conclusion}
+	
+	Pour conclure, la chaîne de traitement des archives numériques au sein des Ministères est aujourd’hui relativement fixée et fonctionnelle en ce qui concerne les archives bureautiques. Cette méthodologie s’est en réalité créée à partir des normes et des outils qui la constituent. Au cœur de ces contraintes se trouve principalement le \gls{SEDA} et particulièrement ses versions limitées au sein de ces outils. Sa complexité et sa documentation assez pauvre pour l’instant constituent une difficulté parfois angoissante pour nombre d’archivistes et toujours difficile d’accès pour l’évolution des outils qui manipulent ce standard. Il est néanmoins à noter qu’un travail de refonte de la documentation est actuellement en cours au sein du SIAF pour la version 2.3 sortie fin juillet 2024 et devrait être disponible avant la fin de l’année 2024. 
+	
+	
+	Afin de faire évoluer l’outil \gls{Archifiltre}, il était donc indispensable de pleinement comprendre aussi bien le \gls{SEDA} que la chaîne de traitement définie et ses outils. En effet, l’archivage numérique reste aujourd’hui complexe et pour réussir une nouvelle fonctionnalité, il est primordial d’une part qu’elle respecte les contraintes techniques imposées et d’autre part qu’elle se présente comme complétant logiquement cette chaîne à laquelle les professionnels sont déjà habitués. En effet, son adoption serait bien plus difficile si elle semblait demander de ré-apprendre tous les savoirs du traitement des archives numériques pour l’utiliser. Par ailleurs, la fonctionnalité présentée dans ce travail doit également s’adapter techniquement à l’objet qu’il propose de traiter afin d’en faciliter son archivage : les systèmes d’information. Ces objets dont la forme diffère de l’un à l’autre présentent aujourd’hui une difficulté particulière dans leur archivage, ce que l'exposition des exemples de cas d’usage d’archivage de SI rencontrés par le service des archives des Ministères sociaux permet de mettre en lumière.
+	
+	
+	Ainsi, l’équipe \gls{Archifiltre} a déployé pour réussir l’évolution de leur outil avec cette nouvelle fonctionnalité une méthodologie innovante basée sur l’approche produit et les méthodes agiles. L’adaptabilité de cette méthode et l’importance donnée aux retours utilisateurs tout au long du développement, ainsi que la rigueur qu’impose l’utilisation du \gls{PRD} qui guide l’ensemble des réflexions et empêche de s’éloigner du sujet, ont permis de faire évoluer \gls{Archifiltre} tout en vérifiant continuellement sa cohérence avec l’environnement technique auquel il participe. Par ailleurs, le principe de proposer d’abord un \gls{MVP} et de le faire évoluer ensuite au fil des nouvelles versions de l'application permet de réajuster l’accord au cadre technique défini en cas de problème mais aussi de s’adapter aux évolutions de ce cadre.
+	
+	
+	Enfin, bien que ce travail expose légitimement l’importance de l’évolution des outils afin de répondre aux besoins techniques de l’archivage électronique d’objets toujours plus complexes, il serait intéressant de remettre en perspective la course à l’innovation et à l’amélioration dans laquelle s’inscrit cette démarche. Dans son article \enquote{Technologies de l’information : rupture ou continuité ?}\footcite{chabin_technologies_2017} (2017), Marie Anne Chabin fait notamment la constatation de l’ \enquote{accélération du remplacement des technologies récentes de gestion de l’information par des technologies encore plus récentes}. En effet, l’ère du numérique accélère non seulement la production documentaire mais également l’évolution et l’obsolescence des outils destinés à son traitement et à son archivage. Dans un milieu où le but principal est d’atteindre la pérennisation de l’information, il est légitime de se demander si cette course actuelle au développement des logiciels est toujours pertinente. La création d’Archifiltre et le développement de la fonctionnalité décrite tout au long de ce travail ont une utilité indéniable aujourd’hui pour répondre aux problématiques rencontrées par les archivistes numériques. Néanmoins, il est important de se demander à quel stade peut-on considérer un outil comme abouti ? Comment faire en sorte d’en pérenniser l’usage plutôt que de voir les professionnels contraints de changer d’outil pour s’adapter aux exigences de leur métier ? Finalement, à mesure que la chaîne de traitement se fixe, sera-t-il possible d’atteindre une stabilité dans les outils ou sommes-nous contraints à continuer la course à leur l’amélioration ? Gagnera-t-on un jour cette course ? 
+	
+	
+	\enquote{L’enjeu n’est-il pas aussi, au-delà des technologies, d’analyser les permanences et les révolutions fonctionnelles et sociétales qu’elles induisent, afin de permettre aux managers et à leurs collaborateurs de MIEUX utiliser ces technologies et pas seulement de les utiliser PLUS ?} - MA Chabin\footcite{chabin_technologies_2017}
+	
+\newpage{\pagestyle{empty}\cleardoublepage}
+	
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%
+
+\appendix %Des appendices: tables figures, annexes, table des matière.
+	
+	\part*{Annexes}	
+	\addcontentsline{toc}{part}{Annexes}
+	
+	\chapter[Frise chronologique Archifiltre]{Frise chronologique de la création d’Archifiltre réalisée par Manon Saget-Lethias.}
+	\begin{landscape}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale=0.45]{annexes/annexe1.png}
+			\label{annexe1}
+		\end{figure}
+	\end{landscape}
+	
+	\chapter[Balises métadonnées de description]{Tableau des balises des métadonnées de description d'une Unité d'archive en SEDA 2.2}
+
+	\begin{landscape}
+		\includepdf[pages=-, scale=1,landscape=true]{annexes/Balisage SEDA-Resip export de métadonnées - Métadonnées de description.pdf}
+	\end{landscape}
+	\label{annexeb}
+	
+	\chapter[Balises métadonnées de gestion]{Tableau des balises des métadonnées de gestion d'une Unité d'archive en SEDA 2.2}
+	\begin{landscape}
+		\includepdf[pages=-, scale=1,landscape=true]{annexes/Balisage SEDA-Resip export de métadonnées - Métadonnées de gestion.pdf}
+	\end{landscape}
+	\label{annexec}
+
+	\chapter[Grille étude CYCLAD]{Grille vierge pour réaliser une étude CYCLAD crée par le bureau des archives du Ministère de l'Agriculture}
+	\begin{landscape}
+		\includepdf[pages=-, scale=1,landscape=true]{annexes/grilleCyclad.pdf}
+	\end{landscape}
+	\label{annexed}
+	
+	\chapter[PRD vierge]{Squelette vierge d'un PRD}
+	\includepdf[pages=-, scale=1]{annexes/PRDvierge.pdf}
+	\label{annexee}
+	
+	\chapter[Mode projet et mode produit]{Tableau comparatif de l’approche projet comparée à l’approche produit par beta.gouv\footcite[pp.45-46]{betagouv_guide_2024}}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.45]{annexes/annexe4.1.png}
+		\label{annexe4.1}
+	\end{figure}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.45]{annexes/annexe4.2.png}
+		\label{annexe4.2}
+	\end{figure}
+
+	\chapter[Schéma lean startup]{Schéma des principes du \textit{lean startup} par beta.gouv\footcite[p.18]{betagouv_guide_2024}}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.3]{annexes/annexe5.png}
+		\label{annexe5}
+	\end{figure}
+
+	\chapter[Zooms diagramme d'utilisation]{Zooms sur le diagramme d'utilisation de la fonctionnalité import de métadonnées dans \gls{Archifiltre}
+	}
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.5]{annexes/annexe6.png}
+		\caption{Premier zoom}
+		\label{annexe6}
+	\end{figure}
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.4]{annexes/annexe6.2.png}
+		\caption{Deuxième zoom}
+		\label{annexe6.2}
+	\end{figure}
+	
+	\chapter[Import ReSIP]{Exemple de structure d'un fichier accepté en import dans ReSIP} 
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.6]{annexes/annexe7.png}
+		\label{annexe7}
+	\end{figure}
+	
+	\chapter[Zooms story map]{Zooms sur la \textit{user \gls{story map}} de la fonctionnalité import de métadonnées}
+
+Premier zoom :
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.4]{annexes/annexe8.1.png}
+		\caption{Premier zoom}
+		\label{annexe8.1}
+	\end{figure}
+Deuxième zoom :
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.4]{annexes/annexe8.2.png}
+		\caption{Deuxième zoom}
+		\label{annexe8.2}
+	\end{figure}
+
+	\chapter[Wireframes validés]{Wireframes du parcours utilisateur validés}
+	\includepdf[pages=-, scale=1,landscape=true]{annexes/Chemin wireframes validé.pdf}
+	\label{annexe9}
+
+	\chapter[Zoom spécifications fonctionnelles]{Zoom sur l'exemple de spécifications fonctionnelles détaillées associées au \gls{wireframe} de l'interface correspondante.}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.55]{annexes/annexe9.png}
+		\label{annexe10}
+	\end{figure}
+
+\newpage{\pagestyle{empty}\cleardoublepage}
+
+%%%%%%%%%%%%%%%%%%
+
+\backmatter % glossaire, table des figures, table des matières. 
+
+\printglossaries
+\textit{Ce glossaire a été rédigé avec l'aide de Chat GPT.}
+
+\listoffigures
+\tableofcontents
+\end{document}
