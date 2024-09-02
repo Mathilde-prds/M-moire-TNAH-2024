@@ -1,4 +1,4 @@
-Résumé :
+**Résumé :**
 Ce mémoire a été réalisé à l’occasion d’un stage au bureau des archives des Minis-
 tères sociaux au sein de l’équipe Archifiltre du mois d’avril à août 2024, dans le cadre
 du Master « Technologies numériques appliquées à l’histoire » de l’École nationale des
@@ -10,7 +10,8 @@ gestion de projet mise en œuvre afin d’adapter l’application Archifiltre à
 de l’archivage des systèmes d’information. Ce mémoire vise à présenter les réflexions au-
 tour des contraintes, enjeux et méthodes permettant l’évolution d’un outil numérique de
 traitement archivistique dans le respect des normes et de la chaîne de traitement établie.
-Abstract :
+
+**Abstract :**
 This thesis was completed during an internship at the Archives Oﬀice of the Social
 Ministries within the Archifiltre team, from April to August 2024, as part of the Master’s
 program in Digital Technologies Applied to History (TNAH) at the École nationale des
@@ -23,10 +24,10 @@ systems. The aim of this thesis is to present the reflections on the constraints
 and methods that enable the evolution of a digital archival processing tool while respec-
 ting the established standards and processing chain.
 
-Mots-clés : gestion de projet ; OAIS ; SEDA ; Archifiltre ; Système d’information ;
+**Mots-clés :** gestion de projet ; OAIS ; SEDA ; Archifiltre ; Système d’information ;
 VITAM ; mode produit ; méthode agile ; archives numériques.
 
-Informations bibliographiques : Mathilde PRADES, Développement d’une fonc-
+**Informations bibliographiques :** Mathilde PRADES, Développement d’une fonc-
 tionnalité d’import de métadonnées pour l’archivage des systèmes d’information. Cas
 d’usage de l’application Archifiltre, mémoire de master « Technologies numériques appli-
 quées à l’histoire », dir. Emmanuelle BERMES, École nationale des chartes, 2024.
